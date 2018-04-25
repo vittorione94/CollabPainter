@@ -1,0 +1,19 @@
+#!/bin/bash 
+
+
+rm static/final.js
+rm app.js
+rm dag.js
+rm socket.js
+rm -R editor
+
+rm -R server_img
+mkdir server_img
+
+# mkdir server_img/vittorio
+# mkdir server_img/vittorio2
+
+browserify src/editor/editor.ts -p [ tsify --noImplicitAny ] > static/final.js
+npm run grunt
+#sudo killall -9 node
+npm start

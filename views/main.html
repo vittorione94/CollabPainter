@@ -1,0 +1,185 @@
+<html>
+	<head>
+		<title>My Editor</title>
+		<!--<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Julius+Sans+One">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">-->
+		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		<script src="../static/lib/ts-events.min.js"></script>
+		<script src="../static/lib/jquery-latest.min.js"></script>	
+		<link href="../static/lib/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+  		<script src="../static/lib/jquery-ui.min.js"></script>
+  	    <script>
+			$(document).ready(function() {
+				$("#layers").sortable({
+				connectWith: "#layer",
+				update: function(event, ui) {
+					$('#layer-label')[0].click();
+				}
+				}).disableSelection();
+			});	
+
+  		</script>
+		<script src='../socket.io/socket.io.js'> </script>
+		<script>
+			/* When the user clicks on the button,
+			toggle between hiding and showing the dropdown content */
+			function myFunction() {
+				//console.log(document.getElementById("myDropdown").classList);
+				document.getElementById("myDropdown").classList.toggle("show");
+			}
+
+			// Close the dropdown if the user clicks outside of it
+			window.onclick = function(event) {
+				if (!event.target.matches('.dropbtn')) {
+
+					var dropdowns = document.getElementsByClassName("dropdown-content");
+					var i;
+					for (i = 0; i < dropdowns.length; i++) {
+						var openDropdown = dropdowns[i];
+						if (openDropdown.classList.contains('show')) {
+							openDropdown.classList.remove('show');
+						}
+					}
+				}
+			}
+		</script>
+
+	</head>
+	<div id='header'>
+		<input type="button" id="undo"  name="operations_button"/> 
+		<input type="button" id="redo"  name="operations_button"/>
+
+		<input type="button" id="save"  name=""/>
+		<input type="button" id="init"  name=""/>	
+		<input type="button" id="load"  name=""/>	
+
+
+		<div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn">Filters</button>
+				<div id="myDropdown" class="dropdown-content">
+					<button id="blur"  name="" value="blur" class="filter"/>Box Blur</button>
+					<button id="gaussianBlur"  name="" value="gaussian" class="filter"/>Gaussian Blur</button>
+					
+					<button id="pixelate"  name="" value="pixelate" class="filter"/>Mosaic</button>
+					<button id="grayscale"  name="" value="grayscale" class="filter"/>Grayscale</button>
+					<button id="sharpen"  name="" value="sharpen" class="filter"/>Sharpen</button>
+					<button id="sepiaTone"  name="" value="sepiaTone" class="filter"/>Sepia Tone</button>
+					<!--<button id="gamma"  name="" value="gammaCorrection" class="filter"/>Gamma Correction</button>
+					<button id="median"  name="" value="median" class="filter"/>Despeckle</button>-->
+					<button id="gauss-gauss"  name="" value="gauss-gauss" class="filter"/>Gauss-Gauss</button>
+				</div> 
+
+			</div> 
+
+		</div>
+
+	</div>
+	<div id='context-header'>
+		<label for= "brush-width" >Radius:</label>
+		<input type="range" id="brush-width" min="0" max="100" value="5">
+
+		<label for= "brush-width" >Color:</label>
+		<input type="color" id="brush-color" value="#ff0000" >
+	</div>
+	
+
+	<div id='UI'> 
+		<ul>
+			<li><input type="button" id="brush"  name="operations_button" /></li>	
+			<li><input type="button" id="eraser"  name="operations_button" /></li>	
+			<li><input type="button" id="texbrush"  name="operations_button" /></li>	
+			<li><input type="button" id="selection"  name="operations_button" /></li>	
+		</ul>
+		<ul>
+			<li><input type="button" id="smudge"  name="operations_button"/></li>	
+		</ul>
+	</div>
+
+	<div id = "UIlayers">
+		<div class="label " for="layers">Layers :</div>
+		<div class="label counterlabel">
+			<div style="float:left;margin-left:30px;">Preview/drag</div>
+			<div style="float:right;">| User</div>
+		</div>
+		
+		
+		<ul id="layers" class="">		
+			<li id = "add-layer-label" class="absolute"></li>
+			<li id = "layer-label" class="absolute"> </li>
+			<!--<li  class="preview"> </li>-->
+		</ul>
+		
+		
+	</div>
+	<ul id="layers-interface" class="">
+			<li>
+				<input type="button" id="add-layer" />
+				<input type="button" id="del-layer" />
+			</li>
+	</ul>
+
+	
+
+	<div id="Ui-context" class="">
+		
+		<div class="label " for="brush_op">History: </div>
+		<li id="brush_op" name="operations">
+			<!--<ul>
+				<li> Width  <div id="brush-width-label"></div>  </li>
+				<li><input type="range" id="brush-width" value="100" min = "1.0"></li>
+			</ul>
+			<ul>			
+				<li> Color <div id="brush-color-label"></div>   </li>
+
+				<li><input type="color" id="brush-color" value="#ff0000" ></li>
+				<li><input type="color" id="brush-color" value="#00ff00" ></li>
+			</ul>-->
+			</ul>
+
+			<ul>
+				<li> Opacity % <div id="brush-opacity-label"></div> </li> 
+				<li><input type="range" id="brush-opacity" value="100" min = "1" max = "100" ></li>
+			</ul>
+		</li>
+		<li id="eraser_op" name ="operations">
+				<ul>
+					<li> Width <div id="eraser-width-label">  </div> </li>
+					<li><input type="range" id="eraser-width" value="100" min = "1.0"></li>
+					<li>
+						<div id="eraser_square-label"></div><input type="button" id="eraser_square" name="tex_brush_img" >
+					</li>
+					<li>
+						<div id="eraser_circle-label"></div><input type="button" id="eraser_circle" name="tex_brush_img">
+					</li>
+				</ul>	
+		</li>
+		<li id="texbrush_op" name ="operations">
+				<ul>
+					<li>
+						<div id="tex_brush_img1-label"></div><input type="button" id="tex_brush_img1" name="tex_brush_img" >
+					</li>
+					<li>
+						<div id="tex_brush_img2-label"></div><input type="button" id="tex_brush_img2" name="tex_brush_img">
+					</li>
+					<li>
+						<div id="tex_brush_img3-label"></div><input type="button" id="tex_brush_img3" name="tex_brush_img">
+					</li>
+				</ul>	
+		</li>
+		<li id="selection_op" name ="operations">
+				<ul>
+					<li>
+						You are now in Selection Mode
+					</li>
+				</ul>	
+		</li>
+		<li id="gaussian_op" name ="operations">
+			<ul>
+				<li> Width <div id="gaussian-width-label">  </div> </li>
+				<li><input type="range" id="gaussian-width" value="100" min = "1.0"></li>
+			</ul>
+		</li>
+	</div>		
+	<script src="../static/final.js"></script> 
+	   	
+</html>

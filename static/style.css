@@ -1,0 +1,256 @@
+* {
+    font-family: 'Lato', sans-serif; 
+    font-size: 13px ;
+}
+
+input:focus { outline:none !important }
+textarea, input { outline: none; }
+input[type=range]{width: 100% !important; }
+ul {padding-left: 0px !important; }
+
+output { 
+  width: 100px; 
+  height: 50px; 
+  text-align: left; 
+  color: white; 
+  display: inline-block; 
+  /*font: bold 15px/30px Georgia;*/
+}
+
+
+#header{
+    position:absolute;
+    left:00px;
+    top:00px;
+    width:1245px;
+    background-color: rgb(200,200,200); 
+    height: 50px;
+}
+#UI{
+    position:absolute;
+    left:00px;
+    top:50px;
+    width:50px;
+    background-color: rgb(51,51,51); 
+    height: 655px;
+    box-shadow: 0.1px 1.0px 2px 1px rgb(51,51,51);
+}
+
+canvas:not(.preview){
+    position:absolute;
+    cursor:crosshair;
+    left:60px;
+    top:105px;
+    width:850;
+    height: 600px;
+    border: 1px solid  #777777;
+    outline: 1px solid #e3e3e3;
+}
+
+
+ul li {
+    padding:5px;
+    list-style-type : none ;
+}
+
+#UIlayers, #Ui-context{
+    position:absolute;
+    left:925px;
+    top:105px;
+    width:297px;   
+    height:280px;
+    background-color: rgb(200,200,200); 
+    overflow-y: scroll;
+    padding:10px;
+    border:solid 0.4px #999999;
+}
+
+#Ui-context{
+    left:925px;
+    top:460px;
+    height:225px;
+}
+
+#context-header{
+    position:absolute;
+    left:50px;
+    top:50px;
+    width:1175px;
+    height: 25px;
+    background-color: rgb(51,51,51); 
+    padding: 10px;
+    box-shadow: 0.1px 1.0px 2px 1px #888888;
+}
+
+#layers-interface{
+    position:absolute;
+    left:926px;
+    top:395px;
+    width:317px;   
+    height:40px;
+    background-color: rgb(51,51,51);  
+    border: 0 1px 1px 1px solid  rgb(41,41,41);
+    outline: 1px solid rgb(5,5,5);
+}
+
+
+
+#Ui-context ul li, #Ui-context ul li div{ font-size: 12px;}
+#context-header input{ vertical-align: middle; float: left; margin: 2px;}
+#context-header label{ vertical-align: middle;color: rgb(230,230,230);float: left; margin:5px;}
+#context-header input[type=range]{ width:270px !important;margin-top: 5px;}
+
+#Ui-context ul{
+    margin: 0;
+    padding: 0;
+    border-bottom: solid 1px rgb(240,240,240);
+}
+#Ui-context div{
+    /*float: right;*/
+}
+
+.layer{
+    min-height: 35px;
+    position: inherit;
+    width: 270px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(255,255,255);
+    margin: 0px !important;
+    float: left;
+}
+
+.layer h4{
+    margin-left: 25px;
+}
+
+
+#UI ul{float:right;}
+
+#UI li{
+    margin: 30px 0;
+    border-radius: 2px;
+}
+
+.absolute{position: absolute;}
+
+#texbrush_op li{} 
+
+#header input{
+    margin:10px 30px;
+}
+#UI input, #UIlayers input, #layers-interface input , #Ui-context input,
+#header input{
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 30px;          
+    width: 30px;     
+    vertical-align: middle; /* align the text vertically centered */
+}
+#layers-interface input{
+    margin:0px 10px;
+}
+#UI input{
+    margin: 5px;
+    padding: 1px;
+}
+.label{ 
+    width:270px; 
+    /* position: absolute; */
+    padding: 5px;
+    margin-right: 5px;
+    color: rgb(255,255,255);
+    background: rgb(51,51,51);
+}
+#UIlayers .counterlabel{ 
+    color: rgb(51,51,51);
+    background: none;
+    
+}
+#brush { background-image: url(img/brush.png);}
+#add-layer {background-image: url(img/layers.png);}
+#del-layer {background-image: url(img/bin.png);}
+#texbrush {background-image: url(img/texbrush.png);}
+#selection { background-image: url(img/selection.png);}
+#undo { background-image: url(img/undo.png);}
+#redo { background-image: url(img/redo.png);}
+#save { background-image: url(img/save.png);}
+#init { background-image: url(img/init.png);}
+#load { background-image: url(img/load.png);}
+#smudge { background-image: url(img/gaussian.png);}
+
+#brush_op{ display:none;  }
+#eraser_op{display:none;  }
+#texbrush_op{display:none; }
+#selection_op{display:none; }
+#gaussian_op{display:none; }
+#brush-color{ width:90px;}
+#eraser {background-image: url(img/eraser.png);}
+#eraser_square{background-image: url(img/eraser_square.png)}
+#eraser_circle{background-image: url(img/eraser_circle.png)}
+
+#tex_brush_img1{background-image: url(img/brush_v1_icon.png)}
+#tex_brush_img2{background-image: url(img/brush_v2_icon.png)}
+#tex_brush_img3{background-image: url(img/brush_v3_icon.png)}
+.butvis { background-image: url(img/eyeo.png); float:left;}
+.butvisF { background-image: url(img/eyeolit.png); float:left; width:15px !important; vertical-align: middle;}
+
+.rectangle {
+    border: 2px dashed #777777;
+    position: absolute;
+    z-index: 1001;
+}
+
+
+.preview {
+    float: right;
+    background-size: contain;
+    background-repeat:no-repeat;
+    border: 0.5px dashed #777777;
+    background-color: rgb(254,254,254);
+}
+
+.dropdown-content {
+    display: none;
+    z-index: 100000000; /* Sit on top */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+/*
+.filter {
+    width: 60px;
+	height: 30px;
+	background-color: #4f4f4f;
+	display: inline-block;
+	text-align: center;
+	padding: 5px;
+	color: white;
+}
+*/
+.dropdown-content button {
+    color: black;
+    width: 180px;
+    /*padding: 12px 16px;*/
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content button:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+
+.selected{  background-color: rgba(0,0,0, 0.3) !important; /* Black w/opacity */ }
+
